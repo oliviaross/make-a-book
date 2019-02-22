@@ -1,0 +1,6 @@
+{
+  "name": "generative_poetry_project",
+  "projects": [
+    "poetry"
+  ]
+}
