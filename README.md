@@ -1,7 +1,6 @@
 # make-a-book
 Rajrishi Das and Olivia Ross, 
-Computer Science 590D, 
-Generative Book
+Computer Science 590D
 
 Our mission is to create a program that generates a book. This book will consist of computer generated poetry. We also intend for the layout of the book to be computer-generated. We have determined some development milestones to organize our project workflow:
 - Have our program spit out a plain PDF of generative poetry by 2/18
