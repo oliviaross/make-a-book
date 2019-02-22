@@ -3,7 +3,7 @@ Rajrishi Das and Olivia Ross
 Computer Science 590D
 Generative Book
 
-Our mission is to create a program that generates a book. This book will consist of computer generated poetry. We also intend for the layout of the book to be computer-generated. We have determined two development milestones to organize our project workflow:
+Our mission is to create a program that generates a book. This book will consist of computer generated poetry. We also intend for the layout of the book to be computer-generated. We have determined some development milestones to organize our project workflow:
 - Have our program spit out a plain PDF of generative poetry by 2/18
 - Figure out how to use RiTA.js by 2/8
 - Generate a few different examples of simple poetry by 2/11
