@@ -1,23 +1,17 @@
+//https://github.com/MrRio/jsPDF
 
-//https://github.com/zenozeng/p5.js-pdf
-
-var lines, markov, data1, data2, x = 160, y = 240;
-
-var pdf;
+var lines, markov, data1, data2;
+var cx, cy, r, button, doc;
 
 function preload() {
-
   data1 = loadStrings('data/genesis.txt');
   data2 = loadStrings('data/neruda.txt');
 }
 
 function setup() {
-
-  createCanvas(500, 500);
-  textFont('times', 16);
-  textAlign(LEFT);
-
-  lines = ["click to (re)generate!"];
+  createCanvas(windowWidth, windowHeight);
+  doc = new jsPDF();
+  doc.setFontSize(16);
 
   // create a markov model w' n=4
   markov = new RiMarkov(3);
@@ -26,44 +20,41 @@ function setup() {
   markov.loadText(data1.join(' '));
   markov.loadText(data2.join(' '));
 
-  drawText();
+  // empty poem
+  lines = [];
 
-  pdf = createPDF();
-  pdf.beginRecord();
+  cx = width/2;
+  cy = height/2;
+  r = width/2;
+
+  button = createButton("Add poem");
+  button.position(cx - 20, (cy + r/1.5));
+  button.mousePressed(generate);
 }
 
-function drawText() {
+function draw() {
+  fill(150);
+  ellipse(cx, cy, width/2);
 
-  background(250);
-  text(lines.join('\n'), x, y, 400, 400);
+  fill(255);
+  textAlign(CENTER);
+  textFont('helvetica', 32);
+  text("Generate book!", width/2, height/2);
 }
+
+function generate(){
+  lines = markov.generateSentences(10);
+  var textLines = doc.setFont('times').splitTextToSize(lines.join('\n'), 130);
+  doc.text(textLines, 20, 20);
+
+  doc.addPage(1, 'a6');
+}
+
 
 function mouseClicked() {
-
-  x = y = 50;
-  lines = markov.generateSentences(10);
-  drawText();
-
-  pdf.save();
+  if (abs(cx - mouseX) < width/4 && abs(cy - mouseY) < width/4 ){
+    doc.save('book.pdf');
+    console.log("Pressed!");
+  }
 }
 
-
-// var pdf;
-
-// function setup() {
-//     createCanvas(600, 200, P2D);
-//     pdf = createPDF();
-//     pdf.beginRecord();
-// }
-
-// function draw() {
-//     background(255);
-//     fill('#ED225D');
-//     textSize(100);
-//     textAlign(CENTER);
-//     text(frameCount, width * 0.5, height * 0.5);
-//     if (frameCount % 10 == 0) {
-//         // noLoop();
-//         pdf.save();
-//     }
-// }
