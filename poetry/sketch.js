@@ -1,4 +1,5 @@
 var lines, markov, data1, data2, data3, x = 160, y = 240;
+var fileSelect;
 
 const app = new Clarifai.App({
  apiKey: 'f494dd4cc6354d8f8939c9f845f7d809'
@@ -18,7 +19,8 @@ function setup() {
   textFont('times', 16);
   textAlign(LEFT);
 
-  c.drop(gotFile);
+  fileSelect = createFileInput(gotFile);
+  //c.drop(gotFile);
 
   lines = ["click to (re)generate!"];
 
@@ -44,7 +46,7 @@ function setup() {
 function gotFile (file) {
 
 
-  data3 = loadStrings(file);
+  data3 = loadStrings(file.data);
   markov.loadText(data3.join(' '));
   lines = markov.generateSentences(10);
   console.log("text file!");
